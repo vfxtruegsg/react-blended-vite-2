@@ -2,12 +2,17 @@ import GridItem from '../GridItem/GridItem';
 import Grid from '../Grid/Grid';
 import TodoListItem from '../TodoListItem/TodoListItem';
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ todos, onDelete }) => {
   return (
     <Grid>
       {todos.map(({ id, text }, index) => (
         <GridItem key={id}>
-          <TodoListItem text={text} todoNumber={index + 1} />
+          <TodoListItem
+            id={id}
+            text={text}
+            todoNumber={index + 1}
+            onDelete={onDelete}
+          />
         </GridItem>
       ))}
     </Grid>
