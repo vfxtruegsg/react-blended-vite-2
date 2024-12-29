@@ -1,7 +1,17 @@
 import Text from '../components/Text/Text';
+import TodoList from '../components/TodoList/TodoList';
+
+const todos = [
+  { id: '1', text: 'Practice more' },
+  { id: '2', text: 'Get all tasks done on time' },
+];
 
 const Todos = () => {
-  return <Text textAlign="center">There are no any todos ...</Text>;
+  return (
+    <>
+      <TodoList todos={todos} />
+    </>
+  );
 };
 
 export default Todos;
