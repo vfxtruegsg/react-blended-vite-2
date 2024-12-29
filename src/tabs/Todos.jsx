@@ -1,7 +1,17 @@
 import Text from '../components/Text/Text';
+import Form from '../components/Form/Form';
 
 const Todos = () => {
-  return <Text textAlign="center">There are no any todos ...</Text>;
+  // const [todoList, setTodoList] = useState([]);
+  const handleSubmit = value => {
+    console.log('value', value);
+  };
+
+  return (
+    <>
+      <Form onSubmit={handleSubmit}></Form>
+    </>
+  );
 };
 
 export default Todos;
