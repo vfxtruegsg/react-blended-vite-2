@@ -1,5 +1,6 @@
 import Text from '../components/Text/Text';
 import TodoList from '../components/TodoList/TodoList';
+import Form from '../components/Form/Form';
 
 const todos = [
   { id: '1', text: 'Practice more' },
@@ -7,8 +8,13 @@ const todos = [
 ];
 
 const Todos = () => {
+  const handleSubmit = value => {
+    console.log('value', value);
+  };
+
   return (
     <>
+      <Form onSubmit={handleSubmit}></Form>
       <TodoList todos={todos} />
     </>
   );
