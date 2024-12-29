@@ -3,11 +3,14 @@ import TodoList from '../components/TodoList/TodoList';
 import Form from '../components/Form/Form';
 
 import { nanoid } from 'nanoid';
+import EditForm from '../components/EditForm/EditForm';
 
 const Todos = () => {
   const [todos, setTodos] = useState(
     () => JSON.parse(localStorage.getItem('todos')) ?? [],
   );
+  const [isEditing, setIsEditing] = useState(false);
+  const [currentTodo, setCurrentTodo] = useState({});
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -21,10 +24,47 @@ const Todos = () => {
     setTodos(prev => prev.filter(item => item.id !== id));
   }
 
+  const toggleEditing = todo => {
+    setIsEditing(true);
+    setCurrentTodo(todo);
+  };
+
+  const cancelEdit = () => {
+    setCurrentTodo({});
+    setIsEditing(false);
+  };
+
+  const updateTodo = updatedText => {
+    const updatedTodo = { text: updatedText, id: currentTodo.id };
+    // setTodos(prev =>
+    //   prev.map(item => (item.id === updatedTodo.id ? updatedTodo : item)),
+    // );
+    setTodos(prev => {
+      const index = prev.findIndex(item => item.id === updatedTodo.id);
+      const todos = prev.toSpliced(index, 1, updatedTodo);
+      return todos;
+    });
+    setIsEditing(false);
+    setCurrentTodo({});
+  };
+
   return (
     <>
-      <Form onSubmit={handleSubmit}></Form>
-      <TodoList todos={todos} onDelete={deleteTodo} />
+      {!isEditing ? (
+        <Form onSubmit={handleSubmit}></Form>
+      ) : (
+        <EditForm
+          cancelEdit={cancelEdit}
+          currentTodo={currentTodo}
+          onSubmit={updateTodo}
+        />
+      )}
+
+      <TodoList
+        todos={todos}
+        onDelete={deleteTodo}
+        toggleEditing={toggleEditing}
+      />
     </>
   );
 };

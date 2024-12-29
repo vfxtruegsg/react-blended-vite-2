@@ -2,7 +2,7 @@ import GridItem from '../GridItem/GridItem';
 import Grid from '../Grid/Grid';
 import TodoListItem from '../TodoListItem/TodoListItem';
 
-const TodoList = ({ todos, onDelete }) => {
+const TodoList = ({ todos, onDelete, toggleEditing }) => {
   return (
     <Grid>
       {todos.map(({ id, text }, index) => (
@@ -12,6 +12,7 @@ const TodoList = ({ todos, onDelete }) => {
             text={text}
             todoNumber={index + 1}
             onDelete={onDelete}
+            toggleEditing={toggleEditing}
           />
         </GridItem>
       ))}
