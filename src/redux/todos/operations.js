@@ -15,24 +15,38 @@ export const getData = createAsyncThunk(
   },
 );
 
-export const addTodo = createAsyncThunk('todos/addTodo',
+export const addTodo = createAsyncThunk(
+  'todos/addTodo',
   async (body, thunkAPI) => {
     try {
-      const {data} = await axios.post('/todos', body)
+      const { data } = await axios.post('/todos', body);
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+      return thunkAPI.rejectWithValue(error.message);
     }
-  }
-)
+  },
+);
 
-export const deleteTodo = createAsyncThunk('todos/deleteTodo',
+export const deleteTodo = createAsyncThunk(
+  'todos/deleteTodo',
   async (id, thunkAPI) => {
     try {
-      const {data} = await axios.delete(`/todos/${id}`) 
+      const { data } = await axios.delete(`/todos/${id}`);
       return data;
-      } catch (error) {
-      return thunkAPI.rejectWithValue(error.message)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
-  }
-)
+  },
+);
+
+export const editTodo = createAsyncThunk(
+  'todos/editTodo',
+  async ({ id, ...body }, thunkAPI) => {
+    try {
+      const { data } = await axios.put(`/todos/${id}`, body);
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+);

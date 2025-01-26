@@ -3,9 +3,10 @@ import Text from '../Text/Text';
 import style from './TodoListItem.module.css';
 import { useDispatch } from 'react-redux';
 import { deleteTodo } from '../../redux/todos/operations';
+import { setCurrentTodo } from '../../redux/todos/slice';
 
-const TodoListItem = ({ text, id, todoNumber, toggleEditing }) => {
-  const dispatch = useDispatch()
+const TodoListItem = ({ text, id, todoNumber }) => {
+  const dispatch = useDispatch();
   return (
     <div className={style.box}>
       <Text textAlign="center" marginBottom="20">
@@ -23,7 +24,7 @@ const TodoListItem = ({ text, id, todoNumber, toggleEditing }) => {
       <button
         className={style.editButton}
         type="button"
-        onClick={() => toggleEditing({ text, id })}
+        onClick={() => dispatch(setCurrentTodo({ text, id }))}
       >
         <RiEdit2Line size={24} />
       </button>
