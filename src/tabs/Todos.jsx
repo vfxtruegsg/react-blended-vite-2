@@ -4,6 +4,8 @@ import Form from '../components/Form/Form';
 
 import { nanoid } from 'nanoid';
 import EditForm from '../components/EditForm/EditForm';
+import { useDispatch } from 'react-redux';
+import { getData } from '../redux/operations';
 
 const Todos = () => {
   const [todos, setTodos] = useState(
@@ -47,6 +49,11 @@ const Todos = () => {
     setIsEditing(false);
     setCurrentTodo({});
   };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getData());
+  }, [dispatch]);
 
   return (
     <>
