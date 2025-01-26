@@ -1,8 +1,11 @@
 import GridItem from '../GridItem/GridItem';
 import Grid from '../Grid/Grid';
 import TodoListItem from '../TodoListItem/TodoListItem';
+import { useSelector } from 'react-redux';
+import { selectTodos } from '../../redux/todos/selectors';
 
-const TodoList = ({ todos, onDelete, toggleEditing }) => {
+const TodoList = ({toggleEditing }) => {
+  const todos = useSelector(selectTodos)
   return (
     <Grid>
       {todos.map(({ id, text }, index) => (
@@ -11,7 +14,6 @@ const TodoList = ({ todos, onDelete, toggleEditing }) => {
             id={id}
             text={text}
             todoNumber={index + 1}
-            onDelete={onDelete}
             toggleEditing={toggleEditing}
           />
         </GridItem>

@@ -1,8 +1,11 @@
 import { RiDeleteBinLine, RiEdit2Line } from 'react-icons/ri';
 import Text from '../Text/Text';
 import style from './TodoListItem.module.css';
+import { useDispatch } from 'react-redux';
+import { deleteTodo } from '../../redux/todos/operations';
 
-const TodoListItem = ({ text, id, todoNumber, onDelete, toggleEditing }) => {
+const TodoListItem = ({ text, id, todoNumber, toggleEditing }) => {
+  const dispatch = useDispatch()
   return (
     <div className={style.box}>
       <Text textAlign="center" marginBottom="20">
@@ -12,7 +15,7 @@ const TodoListItem = ({ text, id, todoNumber, onDelete, toggleEditing }) => {
       <button
         className={style.deleteButton}
         type="button"
-        onClick={() => onDelete(id)}
+        onClick={() => dispatch(deleteTodo(id))}
       >
         <RiDeleteBinLine size={24} />
       </button>

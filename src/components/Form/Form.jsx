@@ -1,12 +1,15 @@
 import { FiSearch } from 'react-icons/fi';
 import style from './Form.module.css';
+import { useDispatch } from 'react-redux';
+import { addTodo } from '../../redux/todos/operations';
 
-const Form = ({ onSubmit }) => {
+const Form = () => {
+  const dispatch = useDispatch()
   const onFormSubmit = e => {
     e.preventDefault();
     const form = e.target;
     if (form.search.value.trim() !== '') {
-      onSubmit(form.search.value.trim().toLowerCase());
+      dispatch(addTodo({text: form.search.value.trim().toLowerCase()}))
     } else {
       alert('empty value!');
     }

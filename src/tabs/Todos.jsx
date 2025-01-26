@@ -2,29 +2,17 @@ import { useState, useEffect } from 'react';
 import TodoList from '../components/TodoList/TodoList';
 import Form from '../components/Form/Form';
 
-import { nanoid } from 'nanoid';
 import EditForm from '../components/EditForm/EditForm';
 import { useDispatch } from 'react-redux';
-import { getData } from '../redux/operations';
+import { getData } from '../redux/todos/operations';
 
 const Todos = () => {
-  const [todos, setTodos] = useState(
+
+  const [, setTodos] = useState(
     () => JSON.parse(localStorage.getItem('todos')) ?? [],
   );
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  function handleSubmit(todoText) {
-    setTodos(prev => [...prev, { text: todoText, id: nanoid() }]);
-  }
-
-  function deleteTodo(id) {
-    setTodos(prev => prev.filter(item => item.id !== id));
-  }
 
   const toggleEditing = todo => {
     setIsEditing(true);
@@ -58,7 +46,7 @@ const Todos = () => {
   return (
     <>
       {!isEditing ? (
-        <Form onSubmit={handleSubmit}></Form>
+        <Form ></Form>
       ) : (
         <EditForm
           cancelEdit={cancelEdit}
@@ -68,8 +56,6 @@ const Todos = () => {
       )}
 
       <TodoList
-        todos={todos}
-        onDelete={deleteTodo}
         toggleEditing={toggleEditing}
       />
     </>
